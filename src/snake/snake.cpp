@@ -73,7 +73,4 @@ void Snake::move() {
         delete &tempX;
         delete &tempY;
     }
-
-    delete &x;
-    delete &y;
 }
