@@ -36,21 +36,42 @@ void Location::addX(int lX) {
     *this->x += lX;
 }
 
+void Location::addX(int *lX) {
+    *this->x += *lX;
+}
+
 void Location::addY(int lY) {
     *this->y += lY;
+}
+
+void Location::addY(int *lY) {
+    *this->y += *lY;
 }
 
 void Location::setX(int lX) {
     *this->x = lX;
 }
 
+void Location::setX(int *lX) {
+    *this->x = *lX;
+}
+
 void Location::setY(int lY) {
     *this->y = lY;
 }
 
+void Location::setY(int *lY) {
+    *this->y = *lY;
+}
+
 void Location::setPosition(int lX, int lY) {
-    this->setX(lX);
-    this->setY(lY);
+    *this->x = lX;
+    *this->y = lY;
+}
+
+void Location::setPosition(int *lX, int *lY) {
+    *this->x = *lX;
+    *this->y = *lY;
 }
 
 bool Location::operator==(Location &location) {

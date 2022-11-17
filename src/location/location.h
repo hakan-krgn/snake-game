@@ -27,13 +27,23 @@ public:
 
     void addX(int x);
 
+    void addX(int *x);
+
     void addY(int y);
+
+    void addY(int *y);
 
     void setX(int x);
 
+    void setX(int *x);
+
     void setY(int y);
 
+    void setY(int *y);
+
     void setPosition(int x, int y);
+
+    void setPosition(int *x, int *y);
 
     bool operator==(Location &location);
 

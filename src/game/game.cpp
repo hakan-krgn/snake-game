@@ -20,7 +20,7 @@ Game::~Game() {
 }
 
 void Game::start() {
-    system("MODE con cols=23 lines=24");
+    system("MODE con cols=23 lines=25");
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
 
@@ -93,7 +93,7 @@ void Game::directionInput() {
 }
 
 void Game::draw() {
-    system("cls");
+    std::cout << "\033[0;0H";
 
     for (int i = 0; i < 23; ++i)
         std::cout << "#";
@@ -128,4 +128,6 @@ void Game::draw() {
     for (int i = 0; i < 23; ++i)
         std::cout << "#";
     std::cout << std::endl;
+
+    std::cout << "Score: " << (this->snake->getLength() - 1) * 10 << std::endl;
 }

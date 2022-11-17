@@ -7,7 +7,7 @@
 #include "food.h"
 
 Food::Food() {
-    this->location = new Location(new int(0), new int(0));
+    this->location = new Location(0, 0);
     this->generate(nullptr);
 }
 
@@ -24,20 +24,23 @@ void Food::generate(Snake *snake) {
 
     if (snake == nullptr) {
         this->location->setPosition(rand() % 20, rand() % 20);
-    } else {
-        int x = rand() % 20;
-        int y = rand() % 20;
-        for (int i = 0; i < snake->getLength(); i++) {
-            if (snake->getTail(i) == Location(x, y)) {
-                delete &x;
-                delete &y;
-                this->generate(snake);
-                return;
-            }
-        }
-        this->location->setPosition(x, y);
-
-        delete &x;
-        delete &y;
+        return;
     }
+
+    int x = rand() % 20;
+    int y = rand() % 20;
+    for (int i = 0; i < snake->getLength(); i++) {
+        Location tail = snake->getTail(i);
+        if (tail.getX() == x && tail.getY() == y) {
+            delete &x;
+            delete &y;
+            this->generate(snake);
+            return;
+        }
+        delete &tail;
+    }
+    this->location->setPosition(x, y);
+
+    delete &x;
+    delete &y;
 }

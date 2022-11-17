@@ -8,7 +8,7 @@
 Snake::Snake() {
     this->direction = RIGHT;
     this->length = new int(1);
-    this->tail[0] = Location(new int(0), new int(0));
+    this->tail[0] = Location(0, 0);
 }
 
 Snake::~Snake() {
@@ -39,31 +39,31 @@ void Snake::setDirection(Direction dir) {
 
 void Snake::eatFood() {
     (*this->length)++;
-    this->tail[*this->length - 1] = Location(new int(-2), new int(-2));
+    this->tail[*this->length - 1] = Location(-2, -2);
 }
 
 void Snake::move() {
-    int x = this->tail[0].getX();
-    int y = this->tail[0].getY();
+    int x = int(this->tail[0].getX());
+    int y = int(this->tail[0].getY());
 
     switch (this->direction) {
         case UP:
-            this->tail[0].addY(-1);
+            this->tail[0].addY(new int(-1));
             break;
         case DOWN:
-            this->tail[0].addY(1);
+            this->tail[0].addY(new int(1));
             break;
         case LEFT:
-            this->tail[0].addX(-1);
+            this->tail[0].addX(new int(-1));
             break;
         case RIGHT:
-            this->tail[0].addX(1);
+            this->tail[0].addX(new int(1));
             break;
     }
 
     for (int i = 1; i < *this->length; i++) {
-        int tempX = this->tail[i].getX();
-        int tempY = this->tail[i].getY();
+        int tempX = int(this->tail[i].getX());
+        int tempY = int(this->tail[i].getY());
 
         this->tail[i].setPosition(x, y);
 
