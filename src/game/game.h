@@ -27,6 +27,8 @@ public:
 
     void update();
 
+    void checkWin();
+
     void checkFood();
 
     void checkCollision();

@@ -41,6 +41,14 @@ void Game::update() {
     this->snake->move();
     this->checkCollision();
     this->checkFood();
+    this->checkWin();
+}
+
+void Game::checkWin() {
+    if (this->snake->getLength() == 421) {
+        std::cout << "You win!" << std::endl;
+        this->stop();
+    }
 }
 
 void Game::checkFood() {

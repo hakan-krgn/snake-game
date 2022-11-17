@@ -48,16 +48,16 @@ void Snake::move() {
 
     switch (this->direction) {
         case UP:
-            this->tail[0].addY(new int(-1));
+            this->tail[0].addY(-1);
             break;
         case DOWN:
-            this->tail[0].addY(new int(1));
+            this->tail[0].addY(1);
             break;
         case LEFT:
-            this->tail[0].addX(new int(-1));
+            this->tail[0].addX(-1);
             break;
         case RIGHT:
-            this->tail[0].addX(new int(1));
+            this->tail[0].addX(1);
             break;
     }
 
