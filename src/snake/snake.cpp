@@ -2,7 +2,6 @@
 // Created by Hakan on 16.11.2022.
 //
 
-#include <iostream>
 #include "snake.h"
 
 Snake::Snake() {

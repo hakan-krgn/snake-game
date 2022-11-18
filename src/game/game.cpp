@@ -8,10 +8,10 @@
 #include <valarray>
 #include "game.h"
 
-Game::Game(int area_size) {
+Game::Game(int *area_size) {
     this->snake = new Snake();
+    this->area_size = area_size;
     this->active = new bool(true);
-    this->area_size = new int(area_size);
     this->food = new Food(this->snake, this->area_size);
 }
 

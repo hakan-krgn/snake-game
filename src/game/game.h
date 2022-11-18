@@ -18,7 +18,7 @@ private:
     int *area_size;
 
 public:
-    explicit Game(int area_size);
+    explicit Game(int *area_size);
 
     ~Game();
 
