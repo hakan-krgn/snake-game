@@ -12,16 +12,18 @@
 
 class Food {
 private:
+    Snake *snake;
     Location *location;
+    int *area_size;
 
 public:
-    Food();
+    Food(Snake *snake, int *area_size);
 
     ~Food();
 
     Location getLocation();
 
-    void generate(Snake *snake);
+    void generate();
 };
 
 

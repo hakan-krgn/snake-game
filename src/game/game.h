@@ -15,9 +15,10 @@ private:
     Food *food;
     Snake *snake;
     bool *active;
+    int *area_size;
 
 public:
-    Game();
+    explicit Game(int area_size);
 
     ~Game();
 

@@ -6,31 +6,36 @@
 #include "snake.h"
 
 Snake::Snake() {
+    this->tail = new Tail();
     this->direction = RIGHT;
     this->length = new int(1);
-    this->tail[0] = Location(0, 0);
+    this->tail->push_back(Location(0, 0));
 }
 
 Snake::~Snake() {
     delete this->length;
+    delete this->tail;
     delete &this->direction;
-    delete[] &this->tail;
 }
 
 int Snake::getLength() {
     return *this->length;
 }
 
-Direction Snake::getDirection() {
-    return this->direction;
+Location Snake::getHead() {
+    return this->tail->at(0);
 }
 
-Location Snake::getHead() {
-    return this->tail[0];
+Tail Snake::getTail() {
+    return *this->tail;
 }
 
 Location Snake::getTail(int index) {
-    return this->tail[index];
+    return this->tail->at(index);
+}
+
+Direction Snake::getDirection() {
+    return this->direction;
 }
 
 void Snake::setDirection(Direction dir) {
@@ -39,33 +44,33 @@ void Snake::setDirection(Direction dir) {
 
 void Snake::eatFood() {
     (*this->length)++;
-    this->tail[*this->length - 1] = Location(-2, -2);
+    this->tail->push_back(Location(-2, -2));
 }
 
 void Snake::move() {
-    int x = int(this->tail[0].getX());
-    int y = int(this->tail[0].getY());
+    int x = this->tail->at(0).getX();
+    int y = this->tail->at(0).getY();
 
     switch (this->direction) {
         case UP:
-            this->tail[0].addY(-1);
+            this->tail->at(0).addY(-1);
             break;
         case DOWN:
-            this->tail[0].addY(1);
+            this->tail->at(0).addY(1);
             break;
         case LEFT:
-            this->tail[0].addX(-1);
+            this->tail->at(0).addX(-1);
             break;
         case RIGHT:
-            this->tail[0].addX(1);
+            this->tail->at(0).addX(1);
             break;
     }
 
     for (int i = 1; i < *this->length; i++) {
-        int tempX = int(this->tail[i].getX());
-        int tempY = int(this->tail[i].getY());
+        int tempX = this->tail->at(i).getX();
+        int tempY = this->tail->at(i).getY();
 
-        this->tail[i].setPosition(x, y);
+        this->tail->at(i).setPosition(x, y);
 
         x = tempX;
         y = tempY;
@@ -73,4 +78,7 @@ void Snake::move() {
         delete &tempX;
         delete &tempY;
     }
+
+    delete &x;
+    delete &y;
 }

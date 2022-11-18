@@ -7,49 +7,51 @@
 
 
 
+#include <string>
+
 class Location {
 private:
-    int *x;
-    int *y;
+    int x{};
+    int y{};
 
 public:
     Location();
-
-    Location(int *x, int *y);
 
     Location(int x, int y);
 
     ~Location();
 
-    int getX();
+    int getX() const;
 
-    int getY();
+    int getY() const;
 
     void addX(int x);
 
-    void addX(int *x);
+    void addX(const int *x);
 
     void addY(int y);
 
-    void addY(int *y);
+    void addY(const int *y);
 
     void setX(int x);
 
-    void setX(int *x);
+    void setX(const int *x);
 
     void setY(int y);
 
-    void setY(int *y);
+    void setY(const int *y);
 
     void setPosition(int x, int y);
 
-    void setPosition(int *x, int *y);
+    void setPosition(const int *x, const int *y);
 
-    bool operator==(Location &location);
+    bool operator==(Location &location) const;
 
-    bool operator==(Location location);
+    bool operator==(Location location) const;
 
-    Location *operator=(Location location);
+    bool operator==(Location *location) const;
+
+    Location &operator=(Location location);
 };
 
 

@@ -4,11 +4,16 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include "food.h"
 
-Food::Food() {
+Food::Food(Snake *snake, int *area_size) {
+    srand((unsigned) time(nullptr));
+
+    this->snake = snake;
+    this->area_size = area_size;
     this->location = new Location(0, 0);
-    this->generate(nullptr);
+    this->generate();
 }
 
 Food::~Food() {
@@ -19,26 +24,20 @@ Location Food::getLocation() {
     return *this->location;
 }
 
-void Food::generate(Snake *snake) {
-    srand((unsigned) time(nullptr));
+void Food::generate() {
+    int x = rand() % (*this->area_size - 1);
+    int y = rand() % (*this->area_size - 1);
 
-    if (snake == nullptr) {
-        this->location->setPosition(rand() % 20, rand() % 20);
-        return;
-    }
-
-    int x = rand() % 20;
-    int y = rand() % 20;
-    for (int i = 0; i < snake->getLength(); i++) {
-        Location tail = snake->getTail(i);
+    for (const Location &tail: this->snake->getTail()) {
         if (tail.getX() == x && tail.getY() == y) {
             delete &x;
             delete &y;
-            this->generate(snake);
+
+            this->generate();
             return;
         }
-        delete &tail;
     }
+
     this->location->setPosition(x, y);
 
     delete &x;

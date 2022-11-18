@@ -7,7 +7,10 @@
 
 
 
+#include <vector>
 #include "../location/location.h"
+
+typedef std::vector<Location> Tail;
 
 enum Direction {
     UP,
@@ -19,7 +22,7 @@ enum Direction {
 class Snake {
 private:
     int *length;
-    Location tail[441];
+    Tail *tail;
     Direction direction;
 
 public:
@@ -29,11 +32,13 @@ public:
 
     int getLength();
 
-    Direction getDirection();
-
     Location getHead();
 
+    Tail getTail();
+
     Location getTail(int index);
+
+    Direction getDirection();
 
     void eatFood();
 

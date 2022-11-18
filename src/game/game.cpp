@@ -5,24 +5,32 @@
 #include <iostream>
 #include <conio.h>
 #include <synchapi.h>
+#include <valarray>
 #include "game.h"
 
-Game::Game() {
-    this->food = new Food();
+Game::Game(int area_size) {
     this->snake = new Snake();
     this->active = new bool(true);
+    this->area_size = new int(area_size);
+    this->food = new Food(this->snake, this->area_size);
 }
 
 Game::~Game() {
-    delete &this->food;
-    delete &this->snake;
-    delete &this->active;
+    delete this->food;
+    delete this->snake;
+    delete this->active;
 }
 
 void Game::start() {
-    system("MODE con cols=23 lines=25");
+    std::string input = std::string("MODE con cols=%a% lines=%b%");
+    input.replace(input.find("%a%"), 3, std::to_string(*this->area_size + 2));
+    input.replace(input.find("%b%"), 3, std::to_string(*this->area_size + 4));
+    system(input.c_str());
+
+    std::cout << input << std::endl;
+
     std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    std::cin.tie(nullptr);
 
     while (*this->active) {
         this->directionInput();
@@ -45,7 +53,7 @@ void Game::update() {
 }
 
 void Game::checkWin() {
-    if (this->snake->getLength() == 421) {
+    if (this->snake->getLength() == pow(*this->area_size, 2)) {
         std::cout << "You win!" << std::endl;
         this->stop();
     }
@@ -54,7 +62,7 @@ void Game::checkWin() {
 void Game::checkFood() {
     if (this->snake->getHead() == this->food->getLocation()) {
         this->snake->eatFood();
-        this->food->generate(this->snake);
+        this->food->generate();
     }
 }
 
@@ -67,8 +75,9 @@ void Game::checkCollision() {
         }
     }
 
-    if (this->snake->getHead().getX() < 0 || this->snake->getHead().getX() > 20 ||
-        this->snake->getHead().getY() < 0 || this->snake->getHead().getY() > 20) {
+
+    if (this->snake->getHead().getX() < 0 || this->snake->getHead().getX() >= *this->area_size ||
+        this->snake->getHead().getY() < 0 || this->snake->getHead().getY() >= *this->area_size) {
         std::cout << "Game Over!" << std::endl;
         this->stop();
     }
@@ -103,13 +112,13 @@ void Game::directionInput() {
 void Game::draw() {
     std::cout << "\033[0;0H";
 
-    for (int i = 0; i < 23; ++i)
+    for (int i = 0; i < *this->area_size + 2; ++i)
         std::cout << "#";
     std::cout << std::endl;
 
-    for (int i = 0; i < 21; i++) {
-        for (int j = -1; j < 22; j++) {
-            if (j == -1 || j == 21) {
+    for (int i = 0; i < *this->area_size; i++) {
+        for (int j = -1; j < *this->area_size + 1; j++) {
+            if (j == -1 || j == *this->area_size) {
                 std::cout << "#";
             } else if (this->snake->getHead().getX() == j && this->snake->getHead().getY() == i) {
                 std::cout << "@";
@@ -125,15 +134,14 @@ void Game::draw() {
                     }
                 }
 
-                if (!printed)
-                    std::cout << " ";
+                if (!printed) std::cout << " ";
             }
         }
 
         std::cout << std::endl;
     }
 
-    for (int i = 0; i < 23; ++i)
+    for (int i = 0; i < *this->area_size + 2; ++i)
         std::cout << "#";
     std::cout << std::endl;
 
