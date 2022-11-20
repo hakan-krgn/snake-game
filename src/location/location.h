@@ -45,13 +45,9 @@ public:
 
     void setPosition(const int *x, const int *y);
 
-    bool operator==(Location &location) const;
-
-    bool operator==(Location location) const;
+    bool operator==(const Location &location) const;
 
     bool operator==(Location *location) const;
-
-    Location &operator=(Location location);
 };
 
 

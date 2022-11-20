@@ -66,20 +66,10 @@ void Location::setPosition(const int *lX, const int *lY) {
     this->y = *lY;
 }
 
-bool Location::operator==(Location &location) const {
-    return this->x == location.x && this->y == location.y;
-}
-
-bool Location::operator==(Location location) const {
+bool Location::operator==(const Location &location) const {
     return this->x == location.x && this->y == location.y;
 }
 
 bool Location::operator==(Location *location) const {
     return this->x == location->x && this->y == location->y;
-}
-
-Location &Location::operator=(Location location) {
-    this->x = location.x;
-    this->y = location.y;
-    return *this;
 }
