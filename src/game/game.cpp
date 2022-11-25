@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <conio.h>
-#include <synchapi.h>
 #include <valarray>
+#include <thread>
 #include "game.h"
 
 Game::Game(int *area_size) {
@@ -37,7 +37,7 @@ void Game::start() {
         this->update();
         this->draw();
 
-        Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 
