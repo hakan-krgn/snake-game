@@ -4,11 +4,13 @@
 
 #include "snake.h"
 
+#define DEFAULT_HEAD_LOCATION Location(0, 0)
+
 Snake::Snake() {
     this->tail = new Tail();
     this->direction = RIGHT;
     this->length = new int(1);
-    this->tail->push_back(Location(0, 0));
+    this->tail->push_back(DEFAULT_HEAD_LOCATION);
 }
 
 Snake::~Snake() {
