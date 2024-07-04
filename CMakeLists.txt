@@ -1,16 +1,10 @@
-cmake_minimum_required(VERSION 3.23)
-project(snake_game)
+cmake_minimum_required(VERSION 3.27.8)
+project(snake-game VERSION 0.0.1 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-add_executable(snake_game
-        src/main.cpp
-        src/snake/snake.cpp
-        src/snake/snake.h
-        src/location/location.cpp
-        src/location/location.h
-        src/game/game.cpp
-        src/game/game.h
-        src/food/food.cpp
-        src/food/food.h)
+file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
+add_executable(snake-game ${SOURCE_FILES})
+
+target_include_directories(snake-game PUBLIC include)

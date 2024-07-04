@@ -1,19 +1,15 @@
+#include <game.h>
 #include <iostream>
-#include "game/game.h"
 
 int main() {
-    std::cout << "Please enter an area size: " << std::endl;
+    int area_size;
 
-    int *area_size = new int;
-    std::cin >> *area_size;
+    std::cout << "Please enter an area size: ";
+    std::cin >> area_size;
+    std::cout << std::endl;
 
-
-    Game *game = new Game(area_size);
-    game->start();
-
-
-    delete game;
-    delete area_size;
+    Game game(area_size);
+    game.start();
 
     return 0;
 }
